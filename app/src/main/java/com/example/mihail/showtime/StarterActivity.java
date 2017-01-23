@@ -12,14 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class StarterActivity extends AppCompatActivity {
     public Button btnSignIn, btnSignUp, btnSignInDialog;
@@ -55,23 +47,6 @@ public class StarterActivity extends AppCompatActivity {
 
         btnSignInDialog = (Button) dialog.findViewById(R.id.buttonSignIn);
 
-
-        editTextUserName = (EditText) dialog
-                .findViewById(R.id.editTextUserNameToLogin);
-        editTextPassword = (EditText) dialog
-                .findViewById(R.id.editTextPasswordToLogin);
-
-        LoginDataBaseAdapter lae = new LoginDataBaseAdapter(this);
-        lae.open();
-        lae.insertEntry("Nikola", "Nikola");
-
-
-    }
-
-    public void signIn(View V) {
-
-
-
         btnSignInDialog.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -85,6 +60,7 @@ public class StarterActivity extends AppCompatActivity {
                             "Congrats: Login Successfull", Toast.LENGTH_LONG)
                             .show();
                     dialog.dismiss();
+
                     //((MyApplication) StarterActivity.this.getApplication()).setUserId(userName);
 
                     Intent main = new Intent(StarterActivity.this, MainActivity.class);
@@ -99,6 +75,20 @@ public class StarterActivity extends AppCompatActivity {
             }
         });
 
+
+        editTextUserName = (EditText) dialog
+                .findViewById(R.id.editTextUserNameToLogin);
+        editTextPassword = (EditText) dialog
+                .findViewById(R.id.editTextPasswordToLogin);
+
+        LoginDataBaseAdapter lae = new LoginDataBaseAdapter(this);
+        lae.open();
+        lae.insertEntry("Nikola", "Nikola");
+
+
+    }
+
+    public void signIn(View V) {
         dialog.show();
     }
 

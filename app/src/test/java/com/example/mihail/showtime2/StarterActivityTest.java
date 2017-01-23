@@ -37,6 +37,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowApplication;
 import org.junit.Test;
+import org.robolectric.shadows.ShadowToast;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -70,6 +71,7 @@ public class StarterActivityTest {
 
     @Before
     public void setUp() {
+
         activity = Robolectric.setupActivity(StarterActivity.class);
         dialog = activity.dialog;
         editTextUserName = activity.editTextUserName;
@@ -102,18 +104,23 @@ public class StarterActivityTest {
         assertNotNull(loginDataBaseAdapter);
     }
 
+
     // testirame dali vo bazata vekje postoechkiot user kje se povrze so negoviot password
     @Test
     public void checkIfExistingRecordReturnsResult() {
-        ShadowApplication application = shadowOf(RuntimeEnvironment.application);
-
 
         LoginDataBaseAdapter lae = new LoginDataBaseAdapter(activity);
         lae.open();
-        //lae.insertEntry("Nikola", "Nikola");
-        String bla = lae.getSinlgeEntry("Nikola");
-        assertEquals("Nikola", bla);
+        String result = lae.getSinlgeEntry("Nikola");
+        assertEquals("Nikola", result);
+    }
 
+    @Test
+    public void checkIfNonExistingRecordReturnsResult() {
+        LoginDataBaseAdapter lae = new LoginDataBaseAdapter(activity);
+        lae.open();
+        String result = lae.getSinlgeEntry("NepostoechkiUsername");
+        assertEquals("NOT EXIST", result);
     }
 
     @Test
@@ -149,18 +156,14 @@ public class StarterActivityTest {
 
     @Test
     public void checkClickingOnSignInBringsUpDialog() {
-        //btnSignIn.performClick();
 
-        activity.signIn(btnSignIn);
+        btnSignIn.performClick();
 
         assertTrue(dialog.isShowing());
     }
 
     @Test
     public void checkAttemptToLogInWIthCorrectCredentials() {
-        //btnSignIn.performClick();
-
-        activity.signIn(btnSignIn);
 
         editTextUserName.setText("Nikola");
         editTextPassword.setText("Nikola");
@@ -171,9 +174,10 @@ public class StarterActivityTest {
 
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
 
-        Intent actualIntent = shadowActivity.getNextStartedActivity();
 
+        Intent actualIntent = shadowActivity.getNextStartedActivity();
         assertTrue(actualIntent.filterEquals(expectedIntent));
+
     }
 
     @Test
@@ -185,7 +189,23 @@ public class StarterActivityTest {
 
         btnSignInDialog.performClick();
 
-        assertTrue(dialog.isShowing());
+        String result = ShadowToast.getTextOfLatestToast();
+        String expected = "User Name or Password does not match";
+
+        assertEquals(result, expected);
+    }
+
+    @Test
+    public void checkClickingOnSignUp() {
+        btnSignUp.performClick();
+
+        Intent expectedIntent = new Intent(activity, SignUPActivity.class);
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+
+        Intent actualIntent = shadowActivity.getNextStartedActivity();
+
+        assertTrue(actualIntent.filterEquals(expectedIntent));
     }
 
 

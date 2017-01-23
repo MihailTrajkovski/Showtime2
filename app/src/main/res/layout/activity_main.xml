@@ -1,0 +1,98 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".MainActivity"
+    android:background="#212121">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        ></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingTop="50dp"
+
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Top rated"
+                android:paddingTop="5dp"
+                android:id="@+id/topRated"
+                android:textSize="22sp"
+                android:textColor="#FFF"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:id="@+id/rule"
+                android:background="@color/colorAccent"
+                android:layout_below="@id/topRated"/>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:paddingTop="3dp"
+                android:layout_below="@+id/rule"
+                android:id="@+id/gridView0"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Most popular movies"
+                android:paddingTop="5dp"
+                android:id="@+id/most_popular_movies"
+                android:textSize="22sp"
+                android:layout_below="@+id/gridView0"
+                android:textColor="#fff"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:id="@+id/rule3"
+                android:background="@color/colorAccent"
+                android:layout_below="@id/most_popular_movies"/>
+            <android.support.v7.widget.RecyclerView
+                android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_below="@+id/most_popular_movies"
+                android:id="@+id/gridView1"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="In theathers"
+                android:paddingTop="5dp"
+                android:layout_below="@+id/gridView1"
+                android:id="@+id/in_theathers"
+                android:textSize="22sp"
+                android:textColor="#fff"/>
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:id="@+id/rule2"
+                android:background="@color/colorAccent"
+                android:layout_below="@id/in_theathers"/>
+            <android.support.v7.widget.RecyclerView
+                android:paddingTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_below="@+id/in_theathers"
+                android:id="@+id/gridView2"
+                />
+
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

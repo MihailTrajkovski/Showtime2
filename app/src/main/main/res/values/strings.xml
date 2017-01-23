@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Material ActionBar</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="search">Search</string>
+    <string name="top50">Top 50</string>
+</resources>
